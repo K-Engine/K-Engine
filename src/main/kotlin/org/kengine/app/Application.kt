@@ -4,6 +4,7 @@ import org.kengine.KEngine
 import org.kengine.app.base.IApplication
 import org.kengine.scripting.api.Time
 import org.kengine.window.Window
+import org.lwjgl.opengl.GL11.*
 
 /**
  * The base for any application or game made with KEngine.
@@ -17,12 +18,12 @@ abstract class Application(
     lateinit var parentWindow: Window
         internal set
 
-    override fun create() {}
-    override fun update() {}
-
     internal fun beginUpdate() {
         while(!parentWindow.closeRequested) {
             Time.lastRenderBegin = Time.currentTime
+
+            glClearColor(0f, 0f, 0f, 0f)
+            glClear(GL_COLOR_BUFFER_BIT)
 
             update()
 
@@ -33,6 +34,9 @@ abstract class Application(
             Time.lastRenderBegin = Time.deltaTime
         }
     }
+
+    override fun update() {}
+    override fun create() {}
 
     init {
         KEngine.initializeApplication(this)

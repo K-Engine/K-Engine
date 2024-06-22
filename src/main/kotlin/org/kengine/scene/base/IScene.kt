@@ -1,5 +1,7 @@
 package org.kengine.scene.base
 
+import imgui.ImGui
+
 /**
  * The base for any scene
  */
@@ -19,4 +21,9 @@ interface IScene {
      * Dispose temporary resources here.
      */
     fun destroy()
+
+    /**
+     * Invoked when the UI is ready to be rendered.
+     */
+    fun ui()
 }

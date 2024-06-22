@@ -1,5 +1,6 @@
 package org.kengine.window
 
+import org.kengine.gui.ImGuiRenderer
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL11.glViewport
@@ -37,6 +38,11 @@ class Window internal constructor(
     val closeRequested get() = glfwWindowShouldClose(handle)
 
     /**
+     * The ImGui renderer for this window.
+     */
+    val imGuiRenderer = ImGuiRenderer()
+
+    /**
      * Create the GLFW window.
      */
     fun createWindow() {
@@ -56,6 +62,8 @@ class Window internal constructor(
 
         GL.createCapabilities()
         glViewport(0, 0, width, height)
+
+        imGuiRenderer.init(this)
     }
 
     fun update() {

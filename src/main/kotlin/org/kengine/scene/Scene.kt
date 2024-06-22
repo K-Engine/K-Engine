@@ -1,6 +1,8 @@
 package org.kengine.scene
 
+import imgui.ImGui
 import org.kengine.app.type.GameApplication
+import org.kengine.rendering.scene.SceneRenderer
 import org.kengine.scene.base.IScene
 import org.kengine.scripting.impl.SceneBehaviourScript
 
@@ -15,7 +17,14 @@ abstract class Scene : IScene {
      */
     lateinit var parentApplication: GameApplication
 
+    /**
+     * The renderer for this scene.
+     */
+    lateinit var renderer: SceneRenderer
+
     internal fun reInit() {
+        this.renderer = SceneRenderer(this)
+
         scripts.clear() // Clear all scripts for re-init
 
         // Re-init scripts
@@ -25,13 +34,14 @@ abstract class Scene : IScene {
     }
 
     internal fun render() {
-        // Call global game update
+        // Call global scene update
         update()
 
         // Update all scripts
         scripts.forEach { it.update() }
 
-        // TODO: Render
+        // Render the scene
+        renderer.renderScene()
 
         // Update all scripts
         scripts.forEach { it.postUpdate() }
@@ -44,12 +54,13 @@ abstract class Scene : IScene {
     override fun init() {}
     override fun update() {}
     override fun destroy() {}
+    override fun ui() {}
 
     companion object {
         /**
          * An empty scene that has no functionality
          * for when everything is being initialized.
          */
-        internal val EmptyScene = object : Scene() {}
+        internal val EmptyScene get() = object : Scene() {}
     }
 }
