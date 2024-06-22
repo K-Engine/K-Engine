@@ -1,4 +1,4 @@
-package org.kengine.scene.scripting
+package org.kengine.scripting
 
 /**
  * The base for any script, defines basic methods.
@@ -6,7 +6,7 @@ package org.kengine.scene.scripting
 interface Script<T : Any> {
     /**
      * The parent of this script.
-     * @see org.kengine.scene.scripting.impl.SceneBehaviourScript
+     * @see org.kengine.scripting.impl.SceneBehaviourScript
      */
     var parent: T
 

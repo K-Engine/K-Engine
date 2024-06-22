@@ -4,6 +4,7 @@ import org.kengine.app.Application
 import org.kengine.app.base.IApplication
 import org.kengine.window.Window
 import org.lwjgl.glfw.GLFW.glfwInit
+import org.lwjgl.glfw.GLFW.glfwSetTime
 import org.lwjgl.glfw.GLFWErrorCallback
 
 /**
@@ -45,6 +46,8 @@ object KEngine {
         window.createWindow()
 
         application.create()
+        glfwSetTime(0.0)
+
         application.beginUpdate()
     }
 }

@@ -2,6 +2,7 @@ package org.kengine.app
 
 import org.kengine.KEngine
 import org.kengine.app.base.IApplication
+import org.kengine.scripting.api.Time
 import org.kengine.window.Window
 
 /**
@@ -21,9 +22,15 @@ abstract class Application(
 
     internal fun beginUpdate() {
         while(!parentWindow.closeRequested) {
+            Time.lastRenderBegin = Time.currentTime
+
             update()
 
             parentWindow.update()
+
+            Time.lastRenderEnd = Time.currentTime
+            Time.deltaTime = Time.lastRenderEnd - Time.lastRenderBegin
+            Time.lastRenderBegin = Time.deltaTime
         }
     }
 

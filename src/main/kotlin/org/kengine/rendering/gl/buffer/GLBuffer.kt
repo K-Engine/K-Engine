@@ -1,6 +1,6 @@
-package org.kengine.gl.buffer
+package org.kengine.rendering.gl.buffer
 
-import org.kengine.gl.GLObject
+import org.kengine.rendering.gl.GLObject
 import org.lwjgl.opengl.GL15.*
 
 /**

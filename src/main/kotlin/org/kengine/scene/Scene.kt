@@ -2,7 +2,7 @@ package org.kengine.scene
 
 import org.kengine.app.type.GameApplication
 import org.kengine.scene.base.IScene
-import org.kengine.scene.scripting.impl.SceneBehaviourScript
+import org.kengine.scripting.impl.SceneBehaviourScript
 
 /**
  * The base for any scene. All scenes extend off this scene.

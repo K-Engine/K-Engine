@@ -1,4 +1,4 @@
-package org.kengine.gl
+package org.kengine.rendering.gl
 
 /**
  * Represents an OpenGL object.

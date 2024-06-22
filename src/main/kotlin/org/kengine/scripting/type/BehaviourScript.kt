@@ -1,6 +1,6 @@
-package org.kengine.scene.scripting.type
+package org.kengine.scripting.type
 
-import org.kengine.scene.scripting.Script
+import org.kengine.scripting.Script
 import kotlin.properties.Delegates
 
 /**

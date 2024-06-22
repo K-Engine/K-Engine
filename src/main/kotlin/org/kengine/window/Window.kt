@@ -55,7 +55,6 @@ class Window internal constructor(
         initCallbacks()
 
         GL.createCapabilities()
-
         glViewport(0, 0, width, height)
     }
 

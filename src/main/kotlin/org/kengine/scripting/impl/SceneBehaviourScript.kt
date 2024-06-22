@@ -1,7 +1,7 @@
-package org.kengine.scene.scripting.impl
+package org.kengine.scripting.impl
 
 import org.kengine.scene.Scene
-import org.kengine.scene.scripting.type.BehaviourScript
+import org.kengine.scripting.type.BehaviourScript
 
 /**
  * A basic behaviour script that is to be applied to alter scenes.
