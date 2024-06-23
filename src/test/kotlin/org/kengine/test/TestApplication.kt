@@ -1,6 +1,8 @@
 package org.kengine.test
 
 import org.kengine.app.type.GameApplication
+import org.kengine.rendering.shader.ShaderManager.createProgram
+import org.kengine.rendering.shader.util.ShaderType
 import org.kengine.test.scenes.MyScene
 
 class TestApplication : GameApplication() {
@@ -16,5 +18,11 @@ class TestApplication : GameApplication() {
 
         // Do everything here!
         // Initialize textures, models and buffers here!
+
+        // Create a shader!
+        createProgram("SceneProgram") {
+            shader("/test.glsl", ShaderType.Fragment)
+            shader("/test.v.glsl", ShaderType.Vertex)
+        }
     }
 }

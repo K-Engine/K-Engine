@@ -3,7 +3,7 @@ package org.kengine.scripting.api
 import org.lwjgl.glfw.GLFW.glfwGetTime
 
 /**
- * Helper utility for retrieving time data.
+ * Utility class for retrieving time data.
  */
 object Time {
     /**
