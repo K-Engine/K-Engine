@@ -7,7 +7,9 @@ import org.kengine.scripting.impl.GameBehaviourScript
 /**
  * Represents an object in the hierarchy of Game Objects.
  */
-abstract class GameObject : ScriptableObject<GameObject, GameBehaviourScript>() {
+open class GameObject(
+    val name: String
+) : ScriptableObject<GameObject, GameBehaviourScript>() {
     override val self: GameObject
         get() = this
 

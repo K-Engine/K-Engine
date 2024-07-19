@@ -15,19 +15,19 @@ abstract class Application(
     /**
      * The parent window everything is being rendered on.
      */
-    lateinit var parentWindow: Window
+    lateinit var window: Window
         internal set
 
     internal fun beginUpdate() {
-        while(!parentWindow.closeRequested) {
+        while(!window.closeRequested) {
             Time.lastRenderBegin = Time.currentTime
 
             glClearColor(0f, 0f, 0f, 0f)
-            glClear(GL_COLOR_BUFFER_BIT)
+            glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
 
             update()
 
-            parentWindow.update()
+            window.update()
 
             Time.lastRenderEnd = Time.currentTime
             Time.deltaTime = Time.lastRenderEnd - Time.lastRenderBegin

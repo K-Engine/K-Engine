@@ -2,7 +2,6 @@ package org.kengine.app.type
 
 import org.kengine.app.Application
 import org.kengine.app.ApplicationConfiguration
-import org.kengine.gui.ImGuiRenderer
 import org.kengine.scene.Scene
 
 /**
@@ -25,7 +24,7 @@ open class GameApplication(
         activeScene = scene
 
         // Run scene setup
-        activeScene.parentApplication = this
+        activeScene.application = this
         activeScene.reInit()
     }
 

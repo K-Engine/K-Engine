@@ -1,7 +1,6 @@
 package org.kengine
 
 import org.kengine.app.Application
-import org.kengine.app.base.IApplication
 import org.kengine.window.Window
 import org.lwjgl.glfw.GLFW.glfwInit
 import org.lwjgl.glfw.GLFW.glfwSetTime
@@ -41,7 +40,7 @@ object KEngine {
             application.configuration.windowHeight,
         )
 
-        application.parentWindow = window
+        application.window = window
 
         window.createWindow()
 

@@ -1,5 +1,7 @@
 package org.kengine.resource.base
 
+import java.nio.ByteBuffer
+
 /**
  * The base for any kind of resource.
  */
@@ -15,9 +17,9 @@ internal interface IResource {
     val path: String
 
     /**
-     * Read the resource to a [ByteArray]
+     * Read the resource to a [ByteBuffer]
      */
-    fun readBytes(): ByteArray
+    fun readBytes(): ByteBuffer
 
     /**
      * Read the resource to a [String]

@@ -2,6 +2,7 @@ package org.kengine.rendering.gl.buffer
 
 import org.kengine.rendering.gl.GLObject
 import org.lwjgl.opengl.GL15.*
+import java.nio.FloatBuffer
 
 /**
  * Represents an OpenGL buffer
@@ -31,7 +32,14 @@ class GLBuffer(
     fun insertData(data: FloatArray, mode: Int = GL_STATIC_DRAW) {
         bind()
         glBufferData(bufferType, data, mode)
-        unbind()
+    }
+
+    /**
+     * Insert some data into this buffer.
+     */
+    fun insertData(data: FloatBuffer, mode: Int = GL_STATIC_DRAW) {
+        bind()
+        glBufferData(bufferType, data, mode)
     }
 
     /**
@@ -40,7 +48,6 @@ class GLBuffer(
     fun insertData(data: IntArray, mode: Int = GL_STATIC_DRAW) {
         bind()
         glBufferData(bufferType, data, mode)
-        unbind()
     }
 
     /**
@@ -49,7 +56,6 @@ class GLBuffer(
     fun insertData(data: ShortArray, mode: Int = GL_STATIC_DRAW) {
         bind()
         glBufferData(bufferType, data, mode)
-        unbind()
     }
 
     /**
@@ -58,7 +64,6 @@ class GLBuffer(
     fun insertData(data: DoubleArray, mode: Int = GL_STATIC_DRAW) {
         bind()
         glBufferData(bufferType, data, mode)
-        unbind()
     }
 
     /**

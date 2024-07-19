@@ -1,10 +1,12 @@
 package org.kengine.rendering.shader
 
+import org.joml.Matrix4f
 import org.kengine.rendering.gl.GLObject
 import org.kengine.rendering.shader.util.Shader
 import org.kengine.rendering.shader.util.ShaderType
 import org.kengine.utility.io.ResourceReader
 import org.lwjgl.opengl.GL20.*
+import org.lwjgl.system.MemoryStack
 
 /**
  * Utility to create and configure shader programs
@@ -46,6 +48,15 @@ class ShaderProgram(
         glUseProgram(0)
     }
 
+    /**
+     * Use this shader inside a scope where it is the currently active shader program.
+     */
+    fun use(scope: () -> Unit) {
+        bind()
+        scope.invoke()
+        unbind()
+    }
+
     // Uniforms
 
     /**
@@ -67,6 +78,19 @@ class ShaderProgram(
      */
     operator fun set(name: String, value: Float) {
         glUniform1f(uniformLocation(name), value)
+    }
+
+    /**
+     * Add a uniform to this shader program.
+     */
+    operator fun set(name: String, value: Matrix4f) {
+        MemoryStack.stackPush().use {
+            glUniformMatrix4fv(
+                uniformLocation(name),
+                false,
+                value.get(it.callocFloat(16))
+            )
+        }
     }
 
     /**

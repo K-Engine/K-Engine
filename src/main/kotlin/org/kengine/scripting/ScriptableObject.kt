@@ -1,6 +1,7 @@
 package org.kengine.scripting
 
 import org.kengine.scripting.type.BehaviourScript
+import org.kengine.scripting.type.RenderBehaviourScript
 
 /**
  * The base for any object that uses the Scripting API.
@@ -26,6 +27,15 @@ abstract class ScriptableObject<C : Any, T : BehaviourScript<C>> {
     }
 
     /**
+     * Register a new script.
+     *
+     * @param scriptProvider A lambda that provides an instance of the script.
+     */
+    fun registerScript(scriptProvider: () -> T) {
+        registerScript(scriptProvider())
+    }
+
+    /**
      * Get a registered script.
      *
      * @param S The type of the script
@@ -44,5 +54,11 @@ abstract class ScriptableObject<C : Any, T : BehaviourScript<C>> {
 
     internal fun postUpdateAllScripts() {
         scripts.values.forEach { it.postUpdate() }
+    }
+
+    internal fun renderAllScripts() {
+        scripts.values
+            .filterIsInstance<RenderBehaviourScript<*>>()
+            .forEach { it.render() }
     }
 }

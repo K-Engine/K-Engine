@@ -11,4 +11,5 @@ abstract class BehaviourScript<T : Any> : Script<T> {
 
     override fun initialize() {}
     override fun update() {}
+    override fun postUpdate() {}
 }

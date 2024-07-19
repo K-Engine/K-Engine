@@ -17,7 +17,10 @@ dependencies {
 
     implementation("io.github.spair:imgui-java-natives-windows:$imguiVersion")
 
+    implementation("io.github.oshai:kotlin-logging-jvm:5.1.0")
+
     implementation(platform("org.lwjgl:lwjgl-bom:3.3.3"))
+    implementation("org.joml:joml:1.10.6")
 
     implementation("org.lwjgl", "lwjgl")
     implementation("org.lwjgl", "lwjgl-assimp")

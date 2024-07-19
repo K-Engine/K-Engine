@@ -6,6 +6,7 @@ import org.kengine.utility.io.toByteBuffer
 import org.lwjgl.opengl.GL11.*
 import org.lwjgl.opengl.GL30.glGenerateMipmap
 import org.lwjgl.stb.STBImage
+import org.lwjgl.stb.STBImage.stbi_info_from_memory
 import org.lwjgl.system.MemoryStack
 import java.nio.ByteBuffer
 
@@ -28,29 +29,40 @@ class Texture2D(
     var height = 0
         private set
 
+    private var channels = 0
+
+    private lateinit var buffer: ByteBuffer
+
     init {
         load()
     }
 
     private fun load() {
-        var buffer: ByteBuffer
-
         MemoryStack.stackPush().use {
             val widthBuf = it.mallocInt(1)
             val heightBuf = it.mallocInt(1)
             val channelsBuf = it.mallocInt(1)
 
+            stbi_info_from_memory(resource.readBytes(), widthBuf, heightBuf, channelsBuf)
             buffer = STBImage.stbi_load_from_memory(
-                resource.readBytes().toByteBuffer(it), widthBuf, heightBuf, channelsBuf, 4
+                resource.readBytes(), widthBuf, heightBuf, channelsBuf, 4
             ) ?: error("Failed to load image from ${resource.path}")
 
             width = widthBuf.get()
             height = heightBuf.get()
+            channels = channelsBuf.get()
         }
 
         bind()
 
-        glTexImage2D(target, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer)
+        val format = if (channels == 3) {
+            if (width and 3 != 0) glPixelStorei(GL_UNPACK_ALIGNMENT, 2 - (width and 1))
+            GL_RGB
+        } else {
+            GL_RGBA
+        }
+
+        glTexImage2D(target, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, buffer)
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, if(mipmap) GL_NEAREST_MIPMAP_NEAREST else GL_NEAREST)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)

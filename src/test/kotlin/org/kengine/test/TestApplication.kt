@@ -1,9 +1,16 @@
 package org.kengine.test
 
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.kengine.app.type.GameApplication
 import org.kengine.rendering.shader.ShaderManager.createProgram
 import org.kengine.rendering.shader.util.ShaderType
+import org.kengine.rendering.texture.TextureManager
+import org.kengine.rendering.texture.type.Texture2D
+import org.kengine.resource.ResourceManager
+import org.kengine.resource.type.ClasspathResource
 import org.kengine.test.scenes.MyScene
+
+private val LOGGER = KotlinLogging.logger {  }
 
 class TestApplication : GameApplication() {
     init {
@@ -11,18 +18,7 @@ class TestApplication : GameApplication() {
     }
 
     override fun create() {
-        println("Game has been created!")
-
-        // Display our scene
+        // Display our scene!
         displayScene(MyScene())
-
-        // Do everything here!
-        // Initialize textures, models and buffers here!
-
-        // Create a shader!
-        createProgram("SceneProgram") {
-            shader("/test.glsl", ShaderType.Fragment)
-            shader("/test.v.glsl", ShaderType.Vertex)
-        }
     }
 }
